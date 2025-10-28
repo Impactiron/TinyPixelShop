@@ -1,0 +1,1 @@
+export function fmtTime(min:number){ const m=Math.floor(min)%60, h=Math.floor(min/60)%24; const z=(n:number)=> (n<10?'0':'')+n; return `${z(h)}:${z(m)}` }

@@ -1,0 +1,21 @@
+<!doctype html><html lang='de'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>Play Now</title>
+<style>html,body{height:100%;margin:0;background:#1d1b27;color:#eee;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}.wrap{display:flex;flex-direction:column;align-items:center;gap:12px;padding:12px}canvas{image-rendering:pixelated;border:4px solid #4f4a6a;box-shadow:0 10px 30px rgba(0,0,0,.35)}</style>
+<script src='https://cdn.jsdelivr.net/npm/phaser@3.60.0/dist/phaser.min.js'></script></head><body><div class='wrap'><h1>🛒 Tiny Shop Pixel Sim — Quick Demo</h1><div id='game'></div><div>WASD/⭠⭢⭡⭣ • E</div></div>
+<script type='module'>
+const width=320,height=180,zoom=3,TILE=16,MAP_W=32,MAP_H=18;
+const cfg={type:Phaser.AUTO,parent:'game',backgroundColor:'#22212b',pixelArt:true,scale:{width,height,mode:Phaser.Scale.NONE,zoom},physics:{default:'arcade',arcade:{debug:false}},scene:{preload,create,update}};
+let s,player,grid=[],timeMin=8*60,day=1,stock=10,cash=1500,custs=[],spawnTimer=0;
+new Phaser.Game(cfg);
+function preload(){const g=this.add.graphics();g.fillStyle(0xffffff,1).fillRect(0,0,8,8);g.generateTexture('px',8,8)}
+function create(){s=this;for(let y=0;y<MAP_H;y++){const row=[];for(let x=0;x<MAP_W;x++)row.push((y===0||y===MAP_H-1||x===0||x===MAP_W-1)?1:0);grid.push(row)}grid[3][27]=2;grid[8][8]=3;
+for(let y=0;y<MAP_H;y++)for(let x=0;x<MAP_W;x++){const t=grid[y][x],c=t===1?0x44415a:((x+y)%2===0?0x2b283d:0x2e2b41);s.add.image(x*TILE+8,y*TILE+8,'px').setTint(c).setDisplaySize(TILE,TILE);if(t===2)s.add.image(x*TILE+8,y*TILE+8,'px').setTint(0xd9b28a).setDisplaySize(TILE,TILE);if(t===3)s.add.image(x*TILE+8,y*TILE+8,'px').setTint(0x7aa55a).setDisplaySize(TILE,TILE)}
+player=s.add.rectangle(4*TILE+8,8*TILE+8,TILE,TILE,0xffd86b);this.cursors=this.input.keyboard.createCursorKeys();this.keyE=this.input.keyboard.addKey('E')}
+function update(time,delta){const dt=delta/1000;timeMin+=48*dt;if(timeMin>=20*60){day++;timeMin=8*60;cash-=65}
+const c=this.cursors;let vx=0,vy=0;if(c.left.isDown)vx--;if(c.right.isDown)vx++;if(c.up.isDown)vy--;if(c.down.isDown)vy++;const len=Math.hypot(vx,vy)||1;const spd=90;player.x+=(vx/len)*spd*dt;player.y+=(vy/len)*spd*dt;
+if(Phaser.Input.Keyboard.JustDown(this.keyE)){const tx=Math.floor(player.x/16),ty=Math.floor(player.y/16);for(let oy=-1;oy<=1;oy++)for(let ox=-1;ox<=1;ox++){const t=grid[ty+oy]?.[tx+ox];if(t===3)stock=Math.min(99,stock+5)}}
+spawnTimer-=dt;if(spawnTimer<=0){if(Math.random()<0.9)spawn();spawnTimer=2+Math.random()*2}
+for(const c of custs){c.patience-=dt;if(c.phase==='enter'){c.tx=8;c.ty=9;step(c);if(c.x===c.tx&&c.y===c.ty)c.phase='browse'}else if(c.phase==='browse'){if(stock>0){stock--;c.has=1;c.phase='queue';c.tx=27;c.ty=3}else{c.phase='queue';c.tx=27;c.ty=3}}else if(c.phase==='queue'){step(c);if(c.x===27&&c.y===3){if(c.has)cash+=5;c.phase='exit';c.tx=1;c.ty=9}}else if(c.phase==='exit'){step(c);if(c.x===1&&c.y===9)c.phase='gone'}c.rect.x=c.x*TILE+8;c.rect.y=c.y*TILE+8;c.rect.fillColor=c.has?0x9ad8ff:0xc28bff}
+for(let i=custs.length-1;i>=0;i--)if(custs[i].phase==='gone'||custs[i].patience<=0)custs.splice(i,1)}
+function spawn(){const rect=s.add.rectangle(1*TILE+8,9*TILE+8,TILE,TILE,0x9ad8ff);custs.push({x:1,y:9,tx:8,ty:9,phase:'enter',has:0,patience:45*60,rect})}
+function step(c){const dx=Math.sign(c.tx-c.x),dy=Math.sign(c.ty-c.y);const nx=c.x+dx,ny=c.y+dy;const t=grid[ny]?.[nx];if(t===0||t===2||t===3){c.x=nx;c.y=ny}}
+</script></body></html>
