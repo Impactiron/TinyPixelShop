@@ -9,6 +9,7 @@ const TILE=16, MAP_W=32, MAP_H=18
 
 export class GameScene extends Phaser.Scene {
   cursors!: Phaser.Types.Input.Keyboard.CursorKeys
+  wasd!: { W:Phaser.Input.Keyboard.Key, A:Phaser.Input.Keyboard.Key, S:Phaser.Input.Keyboard.Key, D:Phaser.Input.Keyboard.Key }
   keyE!: Phaser.Input.Keyboard.Key
   keyB!: Phaser.Input.Keyboard.Key
   player!: Phaser.GameObjects.Rectangle
@@ -44,6 +45,7 @@ export class GameScene extends Phaser.Scene {
     // player
     this.player = this.add.rectangle(4*TILE+8,8*TILE+8,TILE,TILE,0xffd86b)
     this.cursors = this.input.keyboard!.createCursorKeys()
+    this.wasd = this.input.keyboard!.addKeys('W,A,S,D') as any
     this.keyE = this.input.keyboard!.addKey('E')
     this.keyB = this.input.keyboard!.addKey('B')
 
@@ -70,11 +72,14 @@ export class GameScene extends Phaser.Scene {
     }
 
     // movement
-    const spd=90; let vx=0, vy=0
-    if(this.cursors.left?.isDown) vx--; if(this.cursors.right?.isDown) vx++
-    if(this.cursors.up?.isDown) vy--; if(this.cursors.down?.isDown) vy++
-    const len=Math.hypot(vx,vy)||1
-    this.player.x += (vx/len)*spd*dt; this.player.y += (vy/len)*spd*dt
+    const spd = 90; let vx = 0, vy = 0
+if (this.cursors.left?.isDown || this.wasd.A?.isDown) vx--
+if (this.cursors.right?.isDown || this.wasd.D?.isDown) vx++
+if (this.cursors.up?.isDown || this.wasd.W?.isDown) vy--
+if (this.cursors.down?.isDown || this.wasd.S?.isDown) vy++
+const len = Math.hypot(vx,vy) || 1
+this.player.x += (vx/len)*spd*dt
+this.player.y += (vy/len)*spd*dt
 
     // interact
     if (Phaser.Input.Keyboard.JustDown(this.keyE)){
