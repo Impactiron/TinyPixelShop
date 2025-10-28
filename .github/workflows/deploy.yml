@@ -22,7 +22,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'npm'
       - run: npm install
       # Wichtig: Repo-Pfad für GitHub Pages
       - run: GH_PAGES_BASE=/TinyPixelShop/ npm run build
