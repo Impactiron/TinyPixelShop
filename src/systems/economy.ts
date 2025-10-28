@@ -1,6 +1,7 @@
 import { GameState } from '../state/GameState'
-const COSTS = { baseRent: 50, powerPerDay: 15 }
 export const ECON = {
-  chargeDailyCosts(){ GameState.data.cash -= (COSTS.baseRent + COSTS.powerPerDay) },
-  sellItem(price:number){ GameState.data.cash += price }
+  dailyCosts(){ return 50 + 15 }, // placeholder; later dynamic by size/power/staff
+  chargeDailyCosts(){ GameState.data.cash -= this.dailyCosts() },
+  canAfford(amount:number){ return GameState.data.cash >= amount },
+  pay(amount:number){ GameState.data.cash -= amount }
 }

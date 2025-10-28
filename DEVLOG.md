@@ -1,6 +1,7 @@
 # Dev Log
 
-## v0.1.0 – 2025-10-28
-- Projekt‑Setup (Phaser+TS+Vite), Pixel‑Grid 16px, 320×180 @ zoom 3
-- Startladen (1 Kasse, 1 Regal), Kundenfluss, Verkauf +5 €
-- Tagesuhr (~15 min/Tag), tägliche Kosten, Opt‑in Telemetrie Stub
+## v0.1.1 – 2025-10-28
+- Implementiert: Bestellsystem (UI, Kosten, Kapazität, Sofort/+1 Tag)
+- GameState: `stock` per Artikel, `vk` pro Artikel, `pending` Lieferungen
+- Tagesintegration: Anlieferung um 08:00; tägliche Fixkosten am Abend
+- UI: Warnbadge bei niedrigen Beständen; Button + Shortcut (B)

@@ -1,25 +1,20 @@
-# Tiny Shop Pixel Sim – Phaser + TypeScript
+# Tiny Shop Pixel Sim – v0.1.1 (Bestellsystem)
 
-**Version:** v0.1.0 • 2025-10-28
+**Erstellt:** 2025-10-28
 
-## Stack
-TypeScript + Vite + Phaser 3.60.x • Desktop & Mobile Browser • Pixel‑Art 16px
+## Neu (v0.1.1)
+- 📦 **Bestellsystem** (Sofortlieferung +100% / +1 Tag Standardpreis)
+- 🧮 Kapazitätsprüfung (100 Lagerplätze, instant zählt sofort)
+- 💸 Cash‑Check & Kostenabzug
+- 🛠 VK pro Artikel editierbar (UI)
+- ⏱ Lieferung am Folgetag um 08:00 (automatisch)
+- ⚠️ Mindestbestandswarnung (Badge)
+- 🖱 Öffnen per Button **Bestellen (B)**
 
-## Dev
-```bash
-npm i
-npm run dev
-npm run build
-npm run preview
-```
+## Steuerung
+- WASD/⭠⭢⭡⭣ – bewegen
+- **B** – Bestellfenster öffnen
+- **E** – (dev) nah am Regal +5 auf irgendeinen Artikel
 
-### GitHub Pages
-- `npm run build` → `dist/`
-- Falls Repo‑Pfad (z. B. `/tiny-shop`): `GH_PAGES_BASE=/tiny-shop npm run build`
-
-## Controls
-WASD/⭠⭢⭡⭣ bewegen • E interagieren (Regal = +5 Lager)
-
-## Design
-- Palette flexibel (>16 Farben) – finalisiert später in Asset‑Pipeline
-- UI‑Formen an Produkte anpassbar (Icons/Sprites pro Kategorie)
+## Deploy
+GitHub Pages (`GH_PAGES_BASE`) wie gehabt.

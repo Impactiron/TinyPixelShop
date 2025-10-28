@@ -1,6 +1,5 @@
 import { defineConfig } from 'vite'
-
-export default defineConfig(({ mode }) => ({
+export default defineConfig(()=>({
   base: process.env.GH_PAGES_BASE || '/',
-  build: { target: 'es2020', sourcemap: true },
+  build: { target: 'es2020', sourcemap: true }
 }))
