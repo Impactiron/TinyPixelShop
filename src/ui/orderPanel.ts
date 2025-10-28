@@ -123,7 +123,8 @@ export const OrderUI = {
         GameState.data.pending.push({ id:o.id, qty:o.qty, arrivalDay: today+1, cost:o.cost })
       }
     }
-    GameState.save()
-    this.close()
+GameState.save()
+document.dispatchEvent(new CustomEvent('tsps:stateChanged'))  // HUD sofort aktualisieren
+this.close()
   }
 }
