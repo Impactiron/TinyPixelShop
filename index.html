@@ -1,69 +1,21 @@
 <!doctype html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tiny Shop Pixel Sim</title>
-  <meta name="description" content="Niedlicher Top‑Down Shop‑Simulator (Phaser + TypeScript).">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>!mpact2d – GitHub Pages Demo</title>
   <style>
-    html,body{height:100%;margin:0;background:#1d1b27;color:#eee;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-    .topbar{display:flex;gap:12px;align-items:center;padding:10px 12px;background:#26233a;border-bottom:1px solid #4f4a6a;position:sticky;top:0;z-index:10}
-    .badge{background:#2f2b43;border:1px solid #4f4a6a;border-radius:10px;padding:4px 8px;font-weight:700}
-    .badge.warn{border-color:#ff6b6b;background:#472f3a}
-    .wrap{display:flex;justify-content:center;padding:12px}
-    #game{image-rendering:pixelated;border:4px solid #4f4a6a;box-shadow:0 10px 30px rgba(0,0,0,.35)}
-    .btn{background:#6b62ff;color:#fff;border:none;padding:6px 10px;border-radius:8px;cursor:pointer;font-weight:700}
-    .btn.secondary{background:#3f3b58}
-    /* Order panel */
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,.5);display:none;align-items:center;justify-content:center;padding:12px}
-    .panel{background:#26233a;border:1px solid #4f4a6a;border-radius:12px;max-width:960px;width:100%;padding:12px}
-    .panel h2{margin:6px 0 12px 0}
-    table{width:100%;border-collapse:collapse;font-size:.95rem}
-    th,td{border-bottom:1px solid #3b3652;padding:6px 8px;text-align:left}
-    tfoot td{font-weight:800}
-    input[type=number]{width:72px;background:#2f2b43;border:1px solid #4f4a6a;border-radius:6px;color:#eee;padding:2px 6px}
-    select{background:#2f2b43;border:1px solid #4f4a6a;border-radius:6px;color:#eee;padding:3px 6px}
-    .right{text-align:right}
-    .actions{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
-    .consent{position:fixed;inset:auto 12px 12px 12px;background:#2a2740;border:1px solid #4f4a6a;border-radius:12px;padding:12px;display:none}
+    html, body { margin:0; height:100%; background:#0b0e13; color:#e7e7e7; font-family:system-ui; }
+    #hud { position:fixed; top:8px; left:8px; background:rgba(0,0,0,.5); padding:6px 10px; font:12px/1 monospace; }
+    a { color:#9cf; }
   </style>
 </head>
 <body>
-  <div class="topbar">
-    <span class="badge">💰 Kasse: <span id="cash">1500</span> €</span>
-    <span class="badge">🧭 Tag <span id="day">1</span> • <span id="clock">08:00</span></span>
-    <span class="badge" id="stock-badge">🧺 Lager: <span id="stock">10</span> / <span id="cap">100</span></span>
-    <span class="badge">🛒 Kunden: <span id="cust">0</span></span>
-    <button class="btn" id="order-btn">Bestellen (B)</button>
-  </div>
-  <div class="wrap"><div id="game"></div></div>
-
-  <div class="modal" id="order-modal" aria-hidden="true" role="dialog" aria-label="Bestellsystem">
-    <div class="panel">
-      <h2>📦 Bestellsystem</h2>
-      <table id="order-table">
-        <thead><tr>
-          <th>Artikel</th><th>Kategorie</th><th class="right">EK</th><th class="right">VK</th><th class="right">Vorrat</th><th>Mindest</th><th>Lieferart</th><th>Menge</th><th class="right">Kosten</th>
-        </tr></thead>
-        <tbody></tbody>
-        <tfoot><tr><td colspan="8" class="right">Summe:</td><td class="right" id="sum">0 €</td></tr></tfoot>
-      </table>
-      <div class="actions">
-        <button class="btn secondary" id="order-cancel">Abbrechen</button>
-        <button class="btn" id="order-confirm">Bestellung ausführen</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="consent" id="consent">
-    <div style="font-weight:800; margin-bottom:6px;">Telemetrie (Opt‑in)</div>
-    <div style="opacity:.9; margin-bottom:8px;">Anonyme Nutzungsdaten helfen uns beim Balancing (kein Tracking ohne Zustimmung). Zustimmen?</div>
-    <div style="display:flex; gap:8px;">
-      <button class="btn" id="consent-yes">Ja, aktivieren</button>
-      <button class="btn secondary" id="consent-no">Nein</button>
-    </div>
-  </div>
-
-  <script type="module" src="/src/main.ts"></script>
+  <!-- Deployed under: https://impactiron.github.io/impact2d-engine/ -->
+  <div id="hud">loading…</div>
+  <!-- PIXI v8 via CDN -->
+  <script type="module" crossorigin src="https://unpkg.com/pixi.js@8.2.5/dist/pixi.mjs"></script>
+  <!-- Cache-busting version -->
+  <script type="module" src="./engine/main.js?v=2025-10-29a"></script>
 </body>
 </html>
